@@ -282,6 +282,59 @@ void Read_UART_JSON() {
         } else if ((ssMode != Mode) && Mode == 2) {
           ttMode = 2;
           ssMode = Mode;
+
+          if(Control == 2) {
+            Serial2.print("page HomeNormal");
+            Serial2.write(0xff);
+            Serial2.write(0xff);
+            Serial2.write(0xff);
+
+            if(ttIon == 0) {
+              Serial2.print("bt3.val=");
+              Serial2.print(0);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            } else {
+              Serial2.print("bt3.val=");
+              Serial2.print(1);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            }
+
+            if(ttSpeed == 0) {
+              Serial2.print("h0.val=");
+              Serial2.print(25);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            } else if(ttSpeed == 1) {
+              Serial2.print("h0.val=");
+              Serial2.print(50);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            } else if(ttSpeed == 2) {
+              Serial2.print("h0.val=");
+              Serial2.print(75);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            } else if(ttSpeed == 3) {
+              Serial2.print("h0.val=");
+              Serial2.print(100);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+              Serial2.write(0xff);
+            }
+          } else if (Control == 3) {
+            Serial2.print("page HomeLock");
+            Serial2.write(0xff);
+            Serial2.write(0xff);
+            Serial2.write(0xff);
+          }
+
           Serial2.print("bt0.val=");
           Serial2.print(0);
           Serial2.write(0xff);
@@ -299,52 +352,7 @@ void Read_UART_JSON() {
           Serial2.write(0xff);
           Serial2.write(0xff);
           Serial2.write(0xff);
-
-          Serial2.print("page HomeNormal");
-          Serial2.write(0xff);
-          Serial2.write(0xff);
-          Serial2.write(0xff);
-
-          if(ttIon == 0) {
-            Serial2.print("bt3.val=");
-            Serial2.print(0);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          } else {
-            Serial2.print("bt3.val=");
-            Serial2.print(1);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          }
-
-          if(ttSpeed == 0) {
-            Serial2.print("h0.val=");
-            Serial2.print(25);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          } else if(ttSpeed == 1) {
-            Serial2.print("h0.val=");
-            Serial2.print(50);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          } else if(ttSpeed == 2) {
-            Serial2.print("h0.val=");
-            Serial2.print(75);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          } else if(ttSpeed == 3) {
-            Serial2.print("h0.val=");
-            Serial2.print(100);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-            Serial2.write(0xff);
-          }
-
+          
           digitalWrite(buzzer, HIGH);
           delay(200);
           digitalWrite(buzzer, LOW);
@@ -676,7 +684,7 @@ void DieuKhienHMI() {
         Serial2.write(0xff);
 
         if(ttIon == 0) {
-          Serial2.print("bt3.val=");za
+          Serial2.print("bt3.val=");
           Serial2.print(0);
           Serial2.write(0xff);
           Serial2.write(0xff);
